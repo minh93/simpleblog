@@ -16,6 +16,6 @@ class SessionController < ApplicationController
 
 	def destroy
 		log_out if logged_in
-		render 'static_page/home'
+		redirect_to root_path
 	end
 end

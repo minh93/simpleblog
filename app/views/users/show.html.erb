@@ -5,15 +5,20 @@
       <h1>
         <%= gravatar_for @user %>
         <%= @user.name %>
-      </h1>
-      <%= render 'users/follow_form' if logged_in %>
+      </h1>      
+    </section>
+    <section class="micropost_form">
+      <%= render 'shared/entry_form' %>
     </section>
   </aside>
-  <div class="col-md-8">
+    <div class="col-md-8">
     <% if @user.entries.any? %>
-    <ol class="microposts">
-              
-    </ol>
+      <h3>Microposts (<%= @user.entries.count %>)</h3>
+      <ol class="microposts">
+        <%= render @entries %>
+      </ol>
+      <%= will_paginate @entries %>
     <% end %>
   </div>
+
 </div>
