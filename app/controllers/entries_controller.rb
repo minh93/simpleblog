@@ -3,7 +3,7 @@ class EntriesController < ApplicationController
   before_action :correct_user,   only: :destroy
 
   def create
-    @entry = current_user.entries.build micropost_params
+    @entry = current_user.entries.build entry_params
     if @entry.save
       flash[:success] = "Micropost created!"
       redirect_to root_url
@@ -21,8 +21,8 @@ class EntriesController < ApplicationController
 
   private
 
-  def micropost_params
-    params.require(:entry).permit :content, :picture
+  def entry_params
+    params.require(:entry).permit :content, :picture, :title
   end
 
   def correct_user

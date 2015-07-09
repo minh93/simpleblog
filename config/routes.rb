@@ -12,7 +12,11 @@ Rails.application.routes.draw do
 
   resources :users
   resources :account_activations, only: [:edit]
-  resources :entries, only: [:create, :destroy]
+  resources :entries, only: [:create, :destroy, :show]
+
+  resources :entries do
+    resources :comments
+  end
 
   resources :users do
     member do
@@ -21,6 +25,8 @@ Rails.application.routes.draw do
   end
 
   resources :relationships, only: [:create, :destroy]
+
+  resources :comments, only: [:create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

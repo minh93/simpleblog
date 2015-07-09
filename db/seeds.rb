@@ -27,8 +27,9 @@ end
 
 users = User.order(:created_at).take(6)
 50.times do
-	content = Faker::Lorem.sentence(150)
-	users.each { |user| user.entries.create!(content: content) }
+	content = Faker::Lorem.sentence(80)
+	title = Faker::Lorem.sentence(10)
+	users.each { |user| user.entries.create!(content: content, title: title) }
 end
 
 # Following relationships
@@ -38,3 +39,6 @@ following = users[2..50]
 followers = users[3..40]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
+
+# Fake comment for post
+

@@ -1,13 +1,46 @@
-<li id="micropost-<%= entry.id %>">
-  <%= link_to gravatar_for(entry.user, size: 50), entry.user %>
-  <span class="user"><%= link_to entry.user.name, entry.user %></span>
-  <span class="content"><%= entry.content %></span>
-  <%= image_tag entry.picture.url if entry.picture? %>
-  <span class="timestamp">
-    Posted <%= time_ago_in_words(entry.created_at) %> ago.
-    <% if current_user? entry.user %>
-    <%= link_to "delete", entry, method: :delete,
-    data: { confirm: "You sure?" } %>
-    <% end %>
-  </span>
-</li>
+<div class="row" id="micropost-<%= entry.id %>">
+  <div class="container-fluid">
+    <div class="post-content">
+      <div class="container-fluid">     
+        <div class="row">
+          <div class="col-md-2">
+            <%= link_to gravatar_for(entry.user, size: 50), entry.user %>
+            <div><%= link_to entry.user.name, entry.user %></div>
+          </div>
+          <div class="col-md-8">
+            <div class="container-fluid">
+              <div class="row">
+                <h3 class="entry-title">
+                  <%= entry.title %>
+                </h3>
+              </div>
+              <div class="row entry-content">
+                <div class="">
+                  <%= entry.content %>
+                </div>
+              </div>
+              <%= image_tag entry.picture.url if entry.picture? %>
+              <div class="row timestamp">
+                Posted <%= time_ago_in_words(entry.created_at) %> ago.
+                <% if current_user? entry.user %>
+                <%= link_to "delete", entry, method: :delete,
+                data: { confirm: "You sure?" } %>
+                <% end %>
+              </div>
+              <div class="comment-area row">
+                <div class="comment-list container-fluid">
+                  <div class="row">
+                    <%= render entry.comments%>
+                  </div>
+                  <div class="row">
+                    <%= render "shared/comment_form", entry: entry %>
+                  </div>           
+                </div>
+              </div>
+            </div>
+          </div><!-- end of list post -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

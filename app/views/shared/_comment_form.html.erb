@@ -1,0 +1,10 @@
+<div class="row">
+  <%= form_for [entry,entry.comments.build] do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field col-md-4">
+    <%= f.text_area :content, placeholder: "Share somethings...." %>
+    <%= f.hidden_field :user_id, :value => current_user.id if logged_in %>
+  </div>
+  <%= f.submit "Post", class: "btn btn-primary col-md-2" %>
+  <% end %>
+</div>

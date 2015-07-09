@@ -4,12 +4,12 @@ class Entry < ActiveRecord::Base
 
   default_scope -> { order(created_at: :desc) }
 
-  mount_uploader :picture, PictureUploader
+  has_many :comments, dependent: :destroy
 
+  mount_uploader :picture, PictureUploader
   validate  :picture_size
 
   private
-
 # Validates the size of an uploaded picture.
 def picture_size
   if picture.size > 5.megabytes

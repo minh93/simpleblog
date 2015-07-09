@@ -15,16 +15,16 @@
     </section>
   </aside>
   <div class="col-md-8">
-    <div>
+    <div class="row">
       <%= render 'follow_form' if logged_in %>
-    </div>    
-    <% if @user.entries.any? %>
-    <h3>Post (<%= @user.entries.count %>)</h3>
-    <ol class="microposts">
-      <%= render @entries %>
-    </ol>
-    <%= will_paginate @entries %>
-    <% end %>
+    </div>
+    <div class="row">
+      <div class="container-fluid">
+        <% if @user.entries.any? %>
+        <%= render @entries %>
+        <div class="row"><%= will_paginate @entries %></div>
+        <% end %>
+      </div>
+    </div>
   </div>
-
 </div>
