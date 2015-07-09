@@ -7,17 +7,23 @@
         <%= @user.name %>
       </h1>      
     </section>
+    <section class="stat">
+      <%= render "shared/stats" %>
+    </section>
     <section class="micropost_form">
       <%= render 'shared/entry_form' %>
     </section>
   </aside>
-    <div class="col-md-8">
+  <div class="col-md-8">
+    <div>
+      <%= render 'follow_form' if logged_in %>
+    </div>    
     <% if @user.entries.any? %>
-      <h3>Microposts (<%= @user.entries.count %>)</h3>
-      <ol class="microposts">
-        <%= render @entries %>
-      </ol>
-      <%= will_paginate @entries %>
+    <h3>Post (<%= @user.entries.count %>)</h3>
+    <ol class="microposts">
+      <%= render @entries %>
+    </ol>
+    <%= will_paginate @entries %>
     <% end %>
   </div>
 
