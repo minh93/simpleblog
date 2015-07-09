@@ -3,22 +3,18 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user,     only: :destroy
 
-
-  def new
-  end
-
   def index
     @users = User.paginate(page: params[:page])
   end
 
   def show
-  	@user = User.find(params[:id])
+    @user = User.find(params[:id])
     @entries = @user.entries.paginate(page: params[:page])
     @entry = @user.entries.build
   end
 
   def new
-  	@user = User.new
+    @user = User.new
   end
 
   def update
@@ -32,13 +28,13 @@ class UsersController < ApplicationController
   end
 
   def create
-  	@user = User.new(user_params)
-  	if @user.save
-      login
+    @user = User.new(user_params)
+    if @user.save
+      log_in @user
       flash.now[:success] = "Welcome to our blog!"
       redirect_to user_url(@user)
     else
-      render 'new'
+      render "new"
     end
   end
 
@@ -53,15 +49,15 @@ class UsersController < ApplicationController
   end
 
   def user_params
-  	params.require(:user).permit :name, :email, :password, :password_confirmation
+    params.require(:user).permit :name, :email, :password, :password_confirmation
   end
 
   def correct_user
     @user = User.find(params[:id])
-    redirect_to (root_url) unless @user == current_user
+    redirect_to root_url unless @user == current_user
   end
 
-  def admin_user    
+  def admin_user
     redirect_to(root_url) unless !current_user.nil? && current_user.admin?
   end
 end
