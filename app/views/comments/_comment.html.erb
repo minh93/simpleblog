@@ -1,5 +1,5 @@
-<li class="container-fluid" id="comment-<%= comment.id %>">
-  <div class="user">
+<li class="container-fluid user" id="comment-<%= comment.id %>">
+  <div class="">
     <%= link_to gravatar_for(comment.user, size: 50), comment.user %>
     <%= link_to comment.user.name, comment.user %>
   </div>

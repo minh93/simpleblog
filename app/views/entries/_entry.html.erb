@@ -36,10 +36,10 @@
                     <ul class="dropdown-menu scrollable-menu" role="menu">
                       <%= render entry.comments%>
                     </ul>
-                  </div>
-                  <div class="row">
-                    <%= render "shared/comment_form", entry: entry %>
-                  </div>           
+                  </div>                  
+                  <% if current_user.followers.include?(@user) || current_user == @user %>
+                    <%= render "shared/comment_form", entry: entry%>
+                  <% end %>        
                 </div>
               </div>
             </div>
