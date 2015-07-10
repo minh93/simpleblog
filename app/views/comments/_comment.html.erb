@@ -1,15 +1,14 @@
-<div class="" id="comment-<%= comment.id %>">
-
-  <li class="user">
+<li class="container-fluid" id="comment-<%= comment.id %>">
+  <div class="user">
     <%= link_to gravatar_for(comment.user, size: 50), comment.user %>
     <%= link_to comment.user.name, comment.user %>
-  </li>
-  <li class="content"><%= comment.content %></li>
-  <li class="timestamp">
+  </div>
+  <div class="content"><%= comment.content %></div>
+  <div class="timestamp">
     <%= time_ago_in_words(comment.created_at) %> ago.
     <% if current_user? comment.user %>
     <%= link_to "delete", comment, method: :delete,
     data: { confirm: "You sure?" } %>
     <% end %>
-  </li>
-</div>
+  </div>
+</li>
