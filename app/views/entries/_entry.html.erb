@@ -30,7 +30,12 @@
               <div class="comment-area row">
                 <div class="comment-list container-fluid">
                   <div class="row">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                      View comments                      
+                    </a>
+                    <ul class="dropdown-menu scrollable-menu">
                     <%= render entry.comments%>
+                    </ul>
                   </div>
                   <div class="row">
                     <%= render "shared/comment_form", entry: entry %>

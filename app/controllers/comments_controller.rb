@@ -15,6 +15,12 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    Comment.find(params[:id]).destroy
+    flash[:success] = "deleted!"
+    redirect_to request.referrer || root_url
+  end
+
   def find_entry
     @entry = Entry.find params[:entry_id]
     redirect_to root_path, flash[:warning] = "Access denied" unless @entry
