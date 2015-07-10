@@ -12,6 +12,7 @@
     <% @lastest_entries.each do |item| %>
       <%= render item %>
     <%end%>
+    <div class="row"><%= will_paginate @lastest_entries %></div>
   </div> 
 </div>
 <% else %>
