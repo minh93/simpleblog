@@ -29,6 +29,7 @@
               </div>
               <div class="comment-area row">
                 <div class="comment-list container-fluid">
+                  <% if entry.comments.count > 0 %>
                   <div class="row">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                       View comments                      
@@ -36,9 +37,10 @@
                     <ul class="dropdown-menu scrollable-menu" role="menu">
                       <%= render entry.comments%>
                     </ul>
-                  </div>                  
+                  </div>
+                  <% end %>                  
                   <% if current_user.followers.include?(@user) || current_user == @user %>
-                    <%= render "shared/comment_form", entry: entry%>
+                  <%= render "shared/comment_form", entry: entry%>
                   <% end %>        
                 </div>
               </div>
