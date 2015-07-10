@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
-  before_action :find_entry
-  before_action :can_comment
+  before_action :find_entry, only: [:create]
+  before_action :can_comment, only: [:create]
 
   def create
     @entry = Entry.find params[:entry_id]
@@ -22,9 +22,9 @@ class CommentsController < ApplicationController
 
   def can_comment
     entry_owner = Entry.find(params[:entry_id]).user
-    if !current_user.followers.include? entry_owner
-      redirect_to current_user
-      flash[:warning] = "Can not create comment here!"
+    unless current_user.followers.include?(entry_owner) || current_user == entry_owner
+      redirect_to entry_owner
+      flash[:warning] = "Can not comment here"
     end
   end
 
